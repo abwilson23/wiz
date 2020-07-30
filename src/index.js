@@ -12,6 +12,8 @@ import "fontsource-roboto";
 class Player {
 	constructor(name) {
 		this.name = name;
+		this.score = 0;
+		this.isTurn = false;
 	}
 }
 
@@ -32,7 +34,11 @@ class Game extends React.Component {
 		};
 	}
 
-	getPlayerNames() {}
+	getPlayerNames(playerNames) {
+		const names = playerNames.filter(x => x);
+		const players = names.map(name => new Player(name));
+		console.log(players);
+	}
 
 	initLeaderboard() {}
 

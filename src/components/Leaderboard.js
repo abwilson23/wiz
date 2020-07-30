@@ -1,10 +1,17 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 const Leaderboard = () => {
 	return <div className="leaderboard"></div>;
 };
+
+function playerBox(props) {
+	return (
+		<Box className="player-box">
+			<div className="player-name"> Name </div>
+			<div className="player-score"> Score </div>
+		</Box>
+	);
+}
 
 export default Leaderboard;
