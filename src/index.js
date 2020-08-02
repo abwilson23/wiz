@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { CSSTransition } from "react-transition-group";
+//import { CSSTransition } from "react-transition-group";
 
-import { Button } from "@material-ui/core";
 import NavBar from "./components/NavBar";
 import Leaderboard from "./components/Leaderboard";
 import PlayerInput from "./components/PlayerInput";
@@ -16,7 +15,7 @@ class Player {
 		this.name = name;
 		this.score = 0;
 		this.currentGuess = "";
-		this.currentTricksWon = null;
+		this.currentTricksWon = "";
 		this.isTurn = false;
 	}
 }
@@ -47,6 +46,13 @@ class Game extends React.Component {
 
 	initLeaderboard() {}
 
+	updateRound(players, round) {
+		this.setState({
+			players: players,
+			round: round,
+		});
+	}
+
 	render() {
 		return (
 			<div>
@@ -57,6 +63,7 @@ class Game extends React.Component {
 						<GuessTracker
 							players={this.state.players}
 							round={this.state.round}
+							updateRound={() => this.updateRound()}
 						></GuessTracker>
 					) : null}
 					{!this.state.start ? (
