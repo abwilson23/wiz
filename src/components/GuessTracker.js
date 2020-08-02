@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
 
 const GuessTracker = props => {
-	const [players, setPlayers] = useState(props.players.slice());
-	let [round, setRound] = useState(props.round);
-	const [begin, setBegin] = useState(false);
+	const [players, setPlayers] = useState(props.players);
+
+	// Don't think I need this.
+	//useEffect(() => {
+	//	setPlayers(props.players);
+	//}, [props.players]);
 
 	function createGuessHandler(index) {
 		return e => {
@@ -24,17 +27,10 @@ const GuessTracker = props => {
 		};
 	}
 
-	function beginRound() {
-		return () => {
-			setBegin(true);
-		};
-	}
-
 	function endRound() {
 		return () => {
 			setPlayers(updateScores(players));
-			setRound(round++);
-			props.updateRound(players, round);
+			props.updateRound(players, props.round + 1);
 		};
 	}
 
@@ -42,10 +38,12 @@ const GuessTracker = props => {
 		let updatedPlayers = players.slice();
 		for (let i = 0; i < updatedPlayers.length; i++) {
 			let p = updatedPlayers[i];
-			if (p.currentTricksWon === "" || p.currentTricksWon === p.currentGuess) {
-				p.score += 2 + p.currentTricksWon;
+			let ct = parseInt(p.currentTricksWon);
+			let cg = parseInt(p.currentGuess);
+			if (isNaN(ct) || ct === cg) {
+				p.score += 2 + ct;
 			} else {
-				p.score -= Math.abs(p.currentTricksWon - p.currentGuess);
+				p.score -= Math.abs(ct - cg);
 			}
 		}
 		return updatedPlayers;
@@ -54,9 +52,14 @@ const GuessTracker = props => {
 	return (
 		<div className="container">
 			<div className="input-message">
-				It is round {round}! Record your guesses below.
+				Round {props.round}! You can leave the Tricks Won box blank if you
+				guessed correctly.
 			</div>
 			<div className="player-guesses">
+				<div id="pad-right" className="guess-field input-message">
+					{" "}
+					Guesses
+				</div>
 				{players.map((player, i) => (
 					<div key={i} className="guess-field">
 						<TextField
@@ -68,43 +71,26 @@ const GuessTracker = props => {
 					</div>
 				))}
 			</div>
-			{!begin ? (
-				<div className="start-button">
-					<Button variant="contained" color="primary" onClick={beginRound()}>
-						Done Guessing
-					</Button>
+			<div className="player-guesses">
+				<div id="pad-right" className="guess-field input-message">
+					Tricks Won
 				</div>
-			) : (
-				<div>
-					<div id="begin-round" className="input-message">
-						<p>
-							The round has begun! Record your final scores below and hit 'End
-							Round' to finish.
-						</p>
-						<p>
-							If you got the correct number of tricks, you can leave the field
-							blank.
-						</p>
+				{players.map((player, i) => (
+					<div key={i} className="guess-field">
+						<TextField
+							value={player.currentTricksWon}
+							label={player.name}
+							variant="outlined"
+							onChange={createTricksWonHandler(i)}
+						/>
 					</div>
-					<div className="player-guesses">
-						{players.map((player, i) => (
-							<div key={i} className="guess-field">
-								<TextField
-									value={player.currentTricksWon}
-									label={player.name}
-									variant="outlined"
-									onChange={createTricksWonHandler(i)}
-								/>
-							</div>
-						))}
-					</div>
-					<div className="start-button">
-						<Button variant="contained" color="primary" onClick={endRound()}>
-							End Round
-						</Button>
-					</div>
-				</div>
-			)}
+				))}
+			</div>
+			<div className="start-button">
+				<Button variant="contained" color="primary" onClick={endRound()}>
+					End Round
+				</Button>
+			</div>
 		</div>
 	);
 };

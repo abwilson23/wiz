@@ -80,7 +80,9 @@ ul {
 	padding-bottom: 2%;
 }
 
-#begin-round {
+#pad-right {
+	padding-right: 3%;
+	text-align: center;
 	padding-top: 2%;
 }
 

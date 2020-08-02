@@ -63,7 +63,7 @@ class Game extends React.Component {
 						<GuessTracker
 							players={this.state.players}
 							round={this.state.round}
-							updateRound={() => this.updateRound()}
+							updateRound={(players, round) => this.updateRound(players, round)}
 						></GuessTracker>
 					) : null}
 					{!this.state.start ? (
