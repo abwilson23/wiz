@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { CSSTransition } from "react-transition-group";
 
-import { Button, Box } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import NavBar from "./components/NavBar";
 import Leaderboard from "./components/Leaderboard";
 import PlayerInput from "./components/PlayerInput";
+import GuessTracker from "./components/GuessTracker";
 
 import "./index.css";
 import "fontsource-roboto";
@@ -13,17 +15,10 @@ class Player {
 	constructor(name) {
 		this.name = name;
 		this.score = 0;
+		this.currentGuess = "";
+		this.currentTricksWon = null;
 		this.isTurn = false;
 	}
-}
-
-function playerBox(props) {
-	return (
-		<Box className="player-box">
-			<div className="player-name"> Name </div>
-			<div className="player-score"> Score </div>
-		</Box>
-	);
 }
 
 class Game extends React.Component {
@@ -31,13 +26,23 @@ class Game extends React.Component {
 		super(props);
 		this.state = {
 			players: [],
+			round: 1,
+			start: false,
 		};
 	}
 
 	getPlayerNames(playerNames) {
 		const names = playerNames.filter(x => x);
-		const players = names.map(name => new Player(name));
-		console.log(players);
+		if (names.length > 1) {
+			const players = names.map(name => new Player(name));
+			players[0].isTurn = true;
+			this.setState({
+				players: players,
+				start: true,
+			});
+		} else {
+			alert("You need at least two players for wizard!");
+		}
 	}
 
 	initLeaderboard() {}
@@ -48,7 +53,19 @@ class Game extends React.Component {
 				<NavBar />
 				<div className="page">
 					<Leaderboard initLeaderboard={this.initLeaderboard} />
-					<PlayerInput getPlayerNames={this.getPlayerNames}></PlayerInput>
+					{this.state.start ? (
+						<GuessTracker
+							players={this.state.players}
+							round={this.state.round}
+						></GuessTracker>
+					) : null}
+					{!this.state.start ? (
+						<PlayerInput
+							// Is this best practice? Arrow functions automatically bind 'this' to their
+							// parent context. Here, that is the Game component
+							getPlayerNames={playerNames => this.getPlayerNames(playerNames)}
+						></PlayerInput>
+					) : null}
 				</div>
 			</div>
 		);

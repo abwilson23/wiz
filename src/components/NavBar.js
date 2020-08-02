@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 const NavBar = () => {
 	const style = {
-		backgroundColor: "#035AA6",
+		//backgroundColor: "#035AA6",
 		alignItems: "center",
 	};
 

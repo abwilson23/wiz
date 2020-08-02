@@ -12,9 +12,12 @@ const PlayerInput = props => {
 	const playerNames = [player1, player2, player3, player4, player5, player6];
 
 	return (
-		<div>
+		<div className="container">
 			<div className="input-message">
-				<p>Enter the player names in your seating order. </p>
+				<p>
+					Enter the player names in your seating order. Player 1 will deal
+					first.
+				</p>
 				<p>Leave extra boxes empty for fewer than 6 players.</p>
 				<p>Prepare for leading suits, wizardry, and hijinx.</p>
 			</div>

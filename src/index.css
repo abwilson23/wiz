@@ -77,6 +77,36 @@ ul {
 	font-style: normal;
 	font-variant: normal;
 	text-transform: none;
+	padding-bottom: 2%;
+}
+
+.start-button {
+	margin-top: 2%;
+	text-align: center;
+}
+
+.player-guesses {
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: space-between;
+	justify-content: space-evenly;
+	justify-content: center;
+	align-items: center;
+}
+
+.guess-field {
+	width: 12%;
+	padding-right: 8px;
+}
+
+.container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .new-game {
