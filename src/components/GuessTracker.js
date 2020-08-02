@@ -29,13 +29,16 @@ const GuessTracker = props => {
 
 	function endRound() {
 		return () => {
-			setPlayers(updateScores(players));
+			setPlayers(updateScoresAndDealer(players));
 			props.updateRound(players, props.round + 1);
 		};
 	}
 
-	function updateScores(players) {
+	function updateScoresAndDealer(players) {
 		let updatedPlayers = players.slice();
+		const index = updatedPlayers.findIndex(item => item.isTurn === true);
+		updatedPlayers[index].isTurn = false;
+		updatedPlayers[(index + 1) % updatedPlayers.length].isTurn = true;
 		for (let i = 0; i < updatedPlayers.length; i++) {
 			let p = updatedPlayers[i];
 			let ct = parseInt(p.currentTricksWon);
@@ -45,15 +48,18 @@ const GuessTracker = props => {
 			} else {
 				p.score -= Math.abs(ct - cg);
 			}
+			// Ignore history for right now.
+			p.currentGuess = "";
+			p.currentTricksWon = "";
 		}
 		return updatedPlayers;
 	}
 
 	return (
 		<div className="container">
+			<div className="round-count">Round {props.round}!</div>
 			<div className="input-message">
-				Round {props.round}! You can leave the Tricks Won box blank if you
-				guessed correctly.
+				You can leave the Tricks Won box blank if you guessed correctly.
 			</div>
 			<div className="player-guesses">
 				<div id="pad-right" className="guess-field input-message">

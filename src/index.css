@@ -86,6 +86,21 @@ ul {
 	padding-top: 2%;
 }
 
+.round-count {
+	text-align: center;
+	padding-bottom: 2%;
+	font-family: Georgia, serif;
+	font-size: 32px;
+	letter-spacing: 2.2px;
+	word-spacing: -0.6px;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: rgb(68, 68, 68);
+	font-style: normal;
+	font-variant: small-caps;
+	text-transform: capitalize;
+}
+
 .start-button {
 	margin-top: 2%;
 	text-align: center;
