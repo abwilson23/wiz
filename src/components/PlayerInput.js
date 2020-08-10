@@ -12,7 +12,7 @@ const PlayerInput = props => {
 	const playerNames = [player1, player2, player3, player4, player5, player6];
 
 	return (
-		<div className="container">
+		<div className="player-input-container">
 			<div className="input-message">
 				<p>
 					Enter the player names in your seating order. Player 1 will deal
@@ -22,42 +22,54 @@ const PlayerInput = props => {
 				<p>Prepare for leading suits, wizardry, and hijinx.</p>
 			</div>
 			<div className="player-input">
-				<TextField
-					value={player1}
-					label="Player 1"
-					variant="outlined"
-					onChange={e => setPlayer1(e.target.value)}
-				/>
-				<TextField
-					value={player2}
-					label="Player 2"
-					variant="outlined"
-					onChange={e => setPlayer2(e.target.value)}
-				/>
-				<TextField
-					value={player3}
-					label="Player 3"
-					variant="outlined"
-					onChange={e => setPlayer3(e.target.value)}
-				/>
-				<TextField
-					value={player4}
-					label="Player 4"
-					variant="outlined"
-					onChange={e => setPlayer4(e.target.value)}
-				/>
-				<TextField
-					value={player5}
-					label="Player 5"
-					variant="outlined"
-					onChange={e => setPlayer5(e.target.value)}
-				/>
-				<TextField
-					value={player6}
-					label="Player 6"
-					variant="outlined"
-					onChange={e => setPlayer6(e.target.value)}
-				/>
+				<div className="input-field">
+					<TextField
+						value={player1}
+						label="Player 1"
+						variant="outlined"
+						onChange={e => setPlayer1(e.target.value)}
+					/>
+				</div>
+				<div className="input-field">
+					<TextField
+						value={player2}
+						label="Player 2"
+						variant="outlined"
+						onChange={e => setPlayer2(e.target.value)}
+					/>
+				</div>
+				<div className="input-field">
+					<TextField
+						value={player3}
+						label="Player 3"
+						variant="outlined"
+						onChange={e => setPlayer3(e.target.value)}
+					/>
+				</div>
+				<div className="input-field">
+					<TextField
+						value={player4}
+						label="Player 4"
+						variant="outlined"
+						onChange={e => setPlayer4(e.target.value)}
+					/>
+				</div>
+				<div className="input-field">
+					<TextField
+						value={player5}
+						label="Player 5"
+						variant="outlined"
+						onChange={e => setPlayer5(e.target.value)}
+					/>
+				</div>
+				<div className="input-field">
+					<TextField
+						value={player6}
+						label="Player 6"
+						variant="outlined"
+						onChange={e => setPlayer6(e.target.value)}
+					/>
+				</div>
 			</div>
 			<div className="start-button">
 				<Button

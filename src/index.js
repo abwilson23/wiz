@@ -26,8 +26,9 @@ class Game extends React.Component {
 		super(props);
 		this.state = {
 			players: [],
-			round: 1,
+			round: 0,
 			start: false,
+			numOfRounds: null,
 		};
 	}
 
@@ -35,7 +36,7 @@ class Game extends React.Component {
 		const names = playerNames.filter(x => x);
 		if (names.length > 1) {
 			const players = names.map(name => new Player(name)); // create player objs
-			const numOfRounds = 60 / players.length;
+			const numOfRounds = 2; //60 / players.length;
 			players[0].isTurn = true; // set first player to be dealer
 			this.setState({
 				players: players,
@@ -47,15 +48,9 @@ class Game extends React.Component {
 		}
 	}
 
-	getWinner(players) {
-		const sorted = players.slice().sort((a, b) => a.score - b.score);
-		return players[sorted.length - 1].name;
-	}
-
 	updateRound(players, round) {
 		if (round === this.state.numOfRounds) {
-			const winner = this.getWinner(players);
-			Swal.fire("Congratulations " + winner + " !", "You won!", "success");
+			this.endGame(players);
 		}
 		this.setState({
 			players: players,
@@ -63,18 +58,58 @@ class Game extends React.Component {
 		});
 	}
 
+	endGame(players) {
+		const winner = this.getWinner(players);
+		Swal.fire({
+			title: "Congratulations " + winner + "!",
+			text: "You won!",
+			icon: "success",
+			confirmButtonText: "New Game?",
+		}).then(result => {
+			if (result.value) {
+				window.location.reload(true);
+			}
+		});
+	}
+
+	getWinner(players) {
+		const sorted = players.slice().sort((a, b) => a.score - b.score);
+		const max_score = sorted[sorted.length - 1].score;
+		const winners = sorted.filter(element => element.score === max_score);
+		let winner_string = "";
+		switch (winners.length) {
+			case 1:
+				winner_string = winners[0].name;
+				break;
+			case 2:
+				winner_string = winners[0].name + " and " + winners[1].name;
+				break;
+			case 3:
+				winner_string =
+					winners[0].name + ", " + winners[1].name + ", and " + winners[2].name;
+				break;
+			default:
+				winner_string = "everyone..?";
+		}
+		return winner_string;
+	}
+
 	render() {
 		return (
 			<div>
 				<NavBar />
 				<div className="page">
-					<Leaderboard initLeaderboard={this.initLeaderboard} />
 					{this.state.start ? (
-						<GuessTracker
-							players={this.state.players}
-							round={this.state.round}
-							updateRound={(players, round) => this.updateRound(players, round)}
-						></GuessTracker>
+						<React.Fragment>
+							<Leaderboard players={this.state.players} />
+							<GuessTracker
+								players={this.state.players}
+								round={this.state.round}
+								updateRound={(players, round) =>
+									this.updateRound(players, round)
+								}
+							></GuessTracker>
+						</React.Fragment>
 					) : null}
 					{!this.state.start ? (
 						<PlayerInput

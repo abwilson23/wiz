@@ -3,11 +3,6 @@ body {
 	margin: 20px;
 }
 
-ol,
-ul {
-	padding-left: 30px;
-}
-
 .status {
 	margin-bottom: 10px;
 }
@@ -31,13 +26,75 @@ ul {
 	background: #ddd;
 }
 
+.leaderboard-title {
+	flex-basis: content;
+	text-align: center;
+	padding-bottom: 2%;
+	font-family: Georgia, serif;
+	font-size: 25px;
+	letter-spacing: 2.2px;
+	word-spacing: -0.6px;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: rgb(68, 68, 68);
+	font-style: normal;
+	font-variant: small-caps;
+	text-transform: capitalize;
+}
+
 .leaderboard {
 	display: flex;
 	flex-direction: column;
+	flex: 0 1 auto;
+	width: 15%;
+	margin-right: auto;
+}
+
+.guess-tracker {
+	flex: 0 1 auto;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .player-box {
-	flex: auto;
+	flex-basis: auto;
+	text-align: center;
+	margin: 5px;
+	background: #f2f2f2;
+	border: 1px solid #ccc;
+	box-shadow: 1px 1px 2px #fff inset, -1px -1px 2px #fff inset;
+	border-radius: 3px/6px;
+
+	font-family: Georgia, serif;
+	font-size: 20px;
+	letter-spacing: 2.2px;
+	word-spacing: -0.6px;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: rgb(68, 68, 68);
+	font-style: normal;
+	font-variant: small-caps;
+	text-transform: capitalize;
+}
+
+#place0 {
+	background-color: #c9b037;
+}
+
+#place1 {
+	background-color: silver;
+}
+
+#place2 {
+	background-color: #ad8a56;
+}
+
+.shadow {
+	-webkit-border-radius: 0% 0% 100% 100% / 0% 0% 8px 8px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
 }
 
 .nav-bar {
@@ -52,19 +109,25 @@ ul {
 	margin-top: 80px;
 }
 
-.player-input {
-	width: 75%;
+.player-input-container {
 	margin-left: auto;
 	margin-right: auto;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-content: space-between;
-	justify-content: space-evenly;
-	justify-content: center;
-	align-items: center;
 }
 
+.player-input {
+	display: flex;
+	width: 60%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.input-field {
+	display: inline-block;
+	margin: 5px;
+}
 .input-message {
 	font-family: Georgia, serif;
 	font-size: 16px;
@@ -107,7 +170,7 @@ ul {
 }
 
 .player-guesses {
-	width: 75%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
@@ -121,13 +184,7 @@ ul {
 
 .guess-field {
 	width: 12%;
-	padding-right: 8px;
-}
-
-.container {
-	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 3px;
 }
 
 .new-game {

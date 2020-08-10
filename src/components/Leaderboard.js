@@ -1,17 +1,18 @@
 import React from "react";
-//import Box from "@material-ui/core/Box";
 
-const Leaderboard = () => {
-	return <div className="leaderboard"></div>;
-};
-
-/* function playerBox(props) {
+const Leaderboard = props => {
+	const sorted = props.players.sort((a, b) => b.score - a.score);
 	return (
-		<Box className="player-box">
-			<div className="player-name"> Name </div>
-			<div className="player-score"> Score </div>
-		</Box>
+		<div className="leaderboard">
+			<div className="leaderboard-title">Leaderboard</div>
+			{sorted.map((player, i) => (
+				<div id={"place" + i} className="player-box">
+					<div className="player-name"> {player.name} </div>
+					<div className="player-score"> {player.score} </div>
+				</div>
+			))}
+		</div>
 	);
-}*/
+};
 
 export default Leaderboard;

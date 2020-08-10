@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 
 const GuessTracker = props => {
 	const [players, setPlayers] = useState(props.players);
-
-	// Don't think I need this.
-	//useEffect(() => {
-	//	setPlayers(props.players);
-	//}, [props.players]);
 
 	function createGuessHandler(index) {
 		return e => {
@@ -44,7 +39,7 @@ const GuessTracker = props => {
 			let ct = parseInt(p.currentTricksWon);
 			let cg = parseInt(p.currentGuess);
 			if (isNaN(ct) || ct === cg) {
-				p.score += 2 + ct;
+				p.score += 2 + cg;
 			} else {
 				p.score -= Math.abs(ct - cg);
 			}
@@ -56,10 +51,10 @@ const GuessTracker = props => {
 	}
 
 	return (
-		<div className="container">
-			<div className="round-count">Round {props.round}!</div>
+		<div className="guess-tracker">
+			<div className="round-count">Round {props.round + 1}!</div>
 			<div className="input-message">
-				You can leave the Tricks Won box blank if you guessed correctly.
+				Leave the Tricks Won box blank if you guessed correctly.
 			</div>
 			<div className="player-guesses">
 				<div id="pad-right" className="guess-field input-message">
