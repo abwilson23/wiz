@@ -1,5 +1,5 @@
 {
-  "homepage": "http://abwilson23.github.io/wiz",
+  "homepage": "https://abwilson23.github.io/wiz/",
   "name": "wiz",
   "version": "0.1.0",
   "private": true,
@@ -15,7 +15,7 @@
     "sweetalert2": "^9.17.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
