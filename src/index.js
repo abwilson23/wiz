@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Swal from "sweetalert2";
-//import { CSSTransition } from "react-transition-group";
 
 import NavBar from "./components/NavBar";
 import Leaderboard from "./components/Leaderboard";
