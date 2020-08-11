@@ -96,6 +96,7 @@ class Game extends React.Component {
 	render() {
 		return (
 			<div>
+				<title>wiz</title>
 				<NavBar />
 				<div className="page">
 					{this.state.start ? (
